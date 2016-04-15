@@ -1,0 +1,7 @@
+{
+  "itemDisplayName": "Qualys Virtual Scanner Appliance v2.2",
+  "description": "This template allows you to create one instance of Qualys Virtual Scanner Appliance",
+  "summary": "Deploy one instance of Qualys Virtual Scanner Appliance",
+  "githubUsername": "gakimov",
+  "dateUpdated": "2016-04-12"
+}
