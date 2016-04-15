@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "persCode": {
+      "value": 15387080927222
+  },
+  "imageURI" : {
+    "value": "https://qvsacq5itlevnuiuku.blob.core.windows.net/images/qVSA.open-2.3.18-1.vhd"
+  },
+  "storageAccountName": {
+    "value": "qvsacq5itlevnuiuku"
+  },
+  "proxyURL": {
+    "value": "User@23.102.171.214:3129"
+  },
+  "vmSize": {
+    "value": "Standard_A1"
+  },
+  "sshPubKey": {
+    "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCM2+/ziIZCr7tSkKd9f31QLVsJfyCEAlUl+x1iJ84unCVvF2Oh0pjNQD/cGWQcbv9TY1ubbhLLzRRCteQqvmzWoq9iTYCy9OLjnjjQauvVoY5YDva4FHC2nIaH6fsMzBFiTUQ95sPR9rU3h7LwbEDpUWv58b7ilFw7yC7jIMct7iILH2qHM7qdlyrQXj0idAa27C8czN5eVc4rwvwDPztUXnhWTmlV+S6XEK0QLlg807J/XZWGYMu2iPwzgmrMUwSnZizjaBAxaOmyJyu7+e6G1A7wJxgrCvr3rDdvvfxE/090Zt/NxnIBT1QhS9YbXIEjiK756S3QQNYyU2DYNIyl root"
+  }
+}
+}
