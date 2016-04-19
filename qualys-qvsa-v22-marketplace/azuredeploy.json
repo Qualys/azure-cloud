@@ -11,7 +11,7 @@
     }
   },
   "proxyURL": {
-    "defaultValue": "",
+    "defaultValue": "Direct!",
     "type": "string",
     "metadata": {
       "description": "[optional] Format is [proxy://]user:password@IP:Port"
@@ -187,18 +187,7 @@
       "computerName": "[variables('vmName')]",
       "adminUsername": "[variables('userName')]",
       "adminPassword": "[parameters('proxyURL')]",
-      "customData": "[parameters('customData')]",
-      "linuxConfiguration": {
-        "disablePasswordAuthentication": false,
-        "ssh": {
-          "publicKeys": [
-          {
-            "path": "[concat('/home/', variables('userName'), '/.ssh/authorized_keys')]",
-            "keyData": "[parameters('sshPubKey')]"
-          }
-          ]
-        }
-      }
+      "customData": "[parameters('customData')]"
     },
     "storageProfile": {
       "imageReference": {  
