@@ -1,0 +1,15 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "persCode": {
+       "value": 20012284492840
+    },
+     "proxyURL": {
+        "value": "Your_Proxy_URL!"
+    },
+     "vmSize": {
+      "value": "Standard_A1"
+    }
+  }
+}
