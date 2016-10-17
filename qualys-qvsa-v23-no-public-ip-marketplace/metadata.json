@@ -1,0 +1,7 @@
+{
+  "itemDisplayName": "Qualys Virtual Scanner Appliance v23b ",
+  "description": "This template allows you to create one instance of Qualys Virtual Scanner Appliance with no public IP assigned",
+  "summary": "Deploy one instance of Qualys Virtual Scanner Appliance",
+  "githubUsername": "sganovska",
+  "dateUpdated": "2016-10-17"
+}

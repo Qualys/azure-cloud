@@ -1,0 +1,185 @@
+{
+"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+"contentVersion": "1.0.0.0",
+"parameters": {
+  "persCode": {
+    "type": "int",
+    "minValue": 10000000000000,
+    "maxValue": 99999999999999,
+    "metadata": {
+      "description": "[required] QualysGuard scanner personalization code, exactly 14 digits"
+    }
+  },
+  "proxyURL": {
+    "defaultValue":"Direct!",
+    "type": "string",
+    "metadata": {
+      "description": "[optional] Format is [proxy://]user:password@IP:Port"
+    }
+  },
+  "virtualNetworkName": {
+    "defaultValue": "myVNET",
+    "type": "string",
+    "metadata": {
+      "description": "[optional] Azure Virtual Network name"
+    }
+  },
+  "addressPrefix": {
+    "defaultValue" : "10.0.0.0/16",
+    "type" : "string",
+    "metadata": {
+      "description": "[optional] Virtual Network IP address space"
+    }
+  },
+  "subnetName": {
+    "defaultValue": "Subnet-1",
+    "type" : "string",
+    "metadata": {
+      "description": "[optional] Subnet Name"
+    }
+  },
+  "subnetPrefix": {
+    "defaultValue": "10.0.0.0/24",
+    "type" : "string",
+    "metadata": {
+      "description": "[optional] Subnet IP value"
+    }
+  },
+  "customData": {
+    "defaultValue": "IyBDT01NRU5UCg==",
+    "type" : "string",
+    "metadata": {
+      "description": "[optional] Custom data in multiline KEY=VALUE format, Base64 encoded"
+    }
+  },
+  "vmSize": {
+    "defaultValue": "Standard_A1",
+    "type": "string",
+    "metadata": {
+      "description": "[optional] Azure VM size"
+    }
+  }
+},
+"variables": {
+  "apiVersion": "2015-06-15",
+  "location": "[resourceGroup().location]",
+  "vmName": "[deployment().name]",
+  "storageAccountName": "[concat('qvsac', uniquestring(resourceGroup().id))]",
+  "storageAccountType": "Standard_LRS",
+
+  "userName": "[concat('u', parameters('persCode'))]",
+  "networkInterfaceName": "[concat(variables('vmName'), '-', 'nic-1')]"
+},
+"outputs": {
+  "vmName": {
+   "type": "string",
+   "value": "[variables('vmName')]"
+   }
+  },
+"resources": [
+{
+  "apiVersion": "[variables('apiVersion')]",
+  "location": "[variables('location')]",
+  "type": "Microsoft.Storage/storageAccounts",
+  "name": "[variables('storageAccountName')]",
+  "properties": {
+    "accountType": "[variables('storageAccountType')]"
+  }
+},
+{
+  "apiVersion": "[variables('apiVersion')]",
+  "location": "[variables('location')]",
+  "type": "Microsoft.Network/virtualNetworks",
+  "name": "[parameters('virtualNetworkName')]",
+  "properties": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "[parameters('addressPrefix')]"
+      ]
+    },
+    "subnets": [
+    {
+      "name": "[parameters('subnetName')]",
+        "properties" : {
+          "addressPrefix": "[parameters('subnetPrefix')]"
+        }
+    }
+    ]
+  }
+},
+{
+  "apiVersion": "[variables('apiVersion')]",
+  "location": "[variables('location')]",
+  "type": "Microsoft.Network/networkInterfaces",
+  "name": "[variables('networkInterfaceName')]",
+  "dependsOn": [
+    "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]"
+  ],
+  "properties": {
+    "ipConfigurations": [
+    {
+      "name": "ipconfig1",
+      "properties": {
+        "subnet": {
+          "id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName')), '/subnets/', parameters('subnetName'))]"
+        }
+      }
+    }
+    ]
+  }
+},
+{
+  "apiVersion": "[variables('apiVersion')]",
+  "location": "[variables('location')]",
+  "type": "Microsoft.Compute/virtualMachines",
+  "name": "[variables('vmName')]",
+  "dependsOn": [
+    "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
+  ],
+  "plan": {
+    "name": "qvsa-23",
+    "product": "qualys-virtual-scanner-v23b",
+    "publisher": "qualysguard"
+  },
+  "properties": {
+    "diagnosticsProfile": {
+      "bootDiagnostics": {
+        "enabled": true,
+        "storageUri": "[concat('http://',variables('storageAccountName'),'.blob.core.windows.net')]"
+      }
+    },
+    "hardwareProfile": {
+      "vmSize": "[parameters('vmSize')]"
+    },
+    "networkProfile": {
+      "networkInterfaces": [
+      {
+        "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]"
+      }
+      ]
+    },
+    "osProfile": {
+      "computerName": "[variables('vmName')]",
+      "adminUsername": "[variables('userName')]",
+      "adminPassword": "[parameters('proxyURL')]",
+      "customData": "[parameters('customData')]"
+    },
+    "storageProfile": {
+      "imageReference": {  
+        "publisher":"qualysguard",
+        "offer":"qualys-virtual-scanner-v23b",
+        "sku":"qvsa-23",
+        "version":"latest"
+      },
+      "osDisk": {
+        "caching": "ReadWrite",
+        "createOption": "FromImage",
+        "name": "osDisk",
+        "vhd": {
+          "uri": "[concat('http://',variables('storageAccountName'),'.blob.core.windows.net/', 'osdisks/', variables('vmName'), '-osDisk.vhd')]"
+        }
+      }
+    }
+  }
+}]
+}
