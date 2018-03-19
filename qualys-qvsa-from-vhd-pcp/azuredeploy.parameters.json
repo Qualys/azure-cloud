@@ -10,7 +10,7 @@
     "value": "qvsacq5itlevnuiuku"
   },
   "proxyURL": {
-    "value": "User@23.102.171.214:3129"
+    "value": "user:password@10.11.12.13:3129"
   },
   "vmSize": {
     "value": "Standard_A1"
