@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "persCode": {
+      "value": 15387080927222
+  },
+  "imageURI" : {
+    "value": "https://qvsacq5itlevnuiuku.blob.core.windows.net/images/qVSA.open-2.3.18-1.vhd"
+  },
+  "storageAccountName": {
+    "value": "qvsacq5itlevnuiuku"
+  },
+  "proxyURL": {
+    "value": "User@23.102.171.214:3129"
+  },
+  "vmSize": {
+    "value": "Standard_A1"
+  }
+}
+}
