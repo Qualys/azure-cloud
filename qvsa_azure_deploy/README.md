@@ -28,7 +28,7 @@ New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFi
 # with parameter file
 New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFile azure_deploy.json -TemplateParameterFile path_to_json_parameter_file
 ```
-
+<h3>Parameters</h3>
 <table style="width:100%">
   <tr>
     <th>Parameter</th>
