@@ -38,7 +38,7 @@ New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFi
   <tr>
     <td>location</td>
     <td>Location identifier</td>
-    <td>Location identifier for deployment (example:- eastus)</td>
+    <td>Location identifier for deployment (example:- eastus)<br><a href="https://azure.microsoft.com/en-in/global-infrastructure/locations" target="_blank">Learn more</a></td>
   </tr>
   <tr>
     <td>scannerName</td>

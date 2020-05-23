@@ -117,7 +117,7 @@
         }
       },
       "metadata": {
-        "description": "Input: vNet custom property object\nDescription: Values in this object will override default values\nLearn more:\n"
+        "description": "Input: vNet custom property object\nDescription: Values in this object will override default values\nLearn more: https://github.com/Qualys/azure-cloud/tree/master/qvsa_azure_deploy#custom-virtual-network-and-public-ip-parameters\n"
       }
     },
     "publicIpNewOrExisting": {
@@ -134,7 +134,7 @@
         "idleTimeoutInMinutes": 30
       },
       "metadata": {
-        "description": "Input: Public Ip custom property object\nDescription: Values in this object will override default values\nLearn more:\n"
+        "description": "Input: Public Ip custom property object\nDescription: Values in this object will override default values\nLearn more: https://github.com/Qualys/azure-cloud/tree/master/qvsa_azure_deploy#custom-virtual-network-and-public-ip-parameters\n"
       }
     }
   },
