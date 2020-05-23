@@ -1,32 +1,30 @@
 <h2>Deploy Qualys Virtual Scanner Appliance On Azure</h2>
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fqualys-qvsa-v22-marketplace%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FQualys%2Fazure-cloud%2Fmaster%2Fqvsa_azure_deploy%2Fazure_deploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fqualys-qvsa-v22-marketplace%2Fazuredeploy.json" target="_blank">
-    <img src="http://armviz.io/visualizebutton.png"/>
-</a>
+
 <h3>Deploy using azcli</h3>
 
-```shell
+``` shell
 az group deployment create --debug --verbose --name <deployment name> --template-file azure_deploy.json --resource-group <resource-group-name>
 ```
-```shell
+```
 # type '?' to see help text
 Please provide string value for 'perscode' (? for help): ?
 Input: Personalization code
 Description: Qualys scanner personalization code, exactly 14 digits
 Learn more: https://www.qualys.com/docs/qualys-virtual-scanner-appliance-user-guide.pdf
 ```
-```shell
+``` shell
 # with parameter file
 az group deployment create --debug --verbose --name <deployment name> --template-file azure_deploy.json --resource-group <resource-group-name> --parameters @<path_to_json_parameter_file>
 ```
 <h3>Deploy using PowerShell</h3>
 
-```shell
+```
 New-AzResourceGroupDeployment -ResourceGroupName <resource-group-name> -TemplateFile azure_deploy.json
 ```
-```shell
+```
 # with parameter file
 New-AzResourceGroupDeployment -ResourceGroupName <resource-group-name> -TemplateFile azure_deploy.json -TemplateParameterFile <path_to_json_parameter_file>
 ```
@@ -133,11 +131,11 @@ New-AzResourceGroupDeployment -ResourceGroupName <resource-group-name> -Template
   </tr>
 </table>
 <h3>Custom Virtual Network And Public IP Parameters</h3>
-<p>Template deploys new virtual network and public ip instances with default paramters layed inside template. If needed these variables can be overridden with custom values. Paramters newVirtualNetworkCustomObject and newPublicIpCustomObject do exactly that. Each except a custom json object representing vNET and Public-IP configuration respectively.</p>
+<p>Template deploys new virtual network and public ip instances with default paramters layed inside template. If needed these variables can be overridden with custom values. Paramters newVirtualNetworkCustomObject and newPublicIpCustomObject do exactly that. Each accepts a custom json object representing vNET and Public-IP configuration respectively.</p>
 
-<p>Sample for more details: </p>
+<p>Sample parameter file for more details: <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/custom_vNet_and_pubip_param.json" target="_blank">example_parameters/custom_vNet_and_pubip_param.json</a></p>
 
-```json
+``` json
 {
   "vNetAddressPrefixes": ["10.0.0.0/24"],
   "subnet": {
@@ -146,10 +144,18 @@ New-AzResourceGroupDeployment -ResourceGroupName <resource-group-name> -Template
   }
 }
 ```
-```json
+``` json
 {
   "sku": "Basic",
   "publicIpAllocationMethod": "Dynamic",
   "idleTimeoutInMinutes": 30
 }
 ```
+<h3>Parameter File Examples</h3>
+<ol>
+  <li>Basic Example: Easy deployment <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/deploy_all_resources_with_defaults.json" target="_blank">example_parameters/deploy_all_resources_with_defaults.json</a></li>
+  <li>Deploy from global market image: <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/deploy_from_global_marketplace_image.json" target="_blank">example_parameters/deploy_from_global_marketplace_image.json.json</a></li>
+  <li>Custom vNET and Public IP parameters: See "Custom Virtual Network And Public IP Parameters" section for more information. <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/custom_vNet_and_pubip_param.json" target="_blank">example_parameters/custom_vNet_and_pubip_param.json</a></li>
+  <li>No Public IP and disable boot diagnostics: <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/disable_boot_diag_and_no_public_ip.json" target="_blank">example_parameters/disable_boot_diag_and_no_public_ip.json</a></li>
+  <li>Link scanner to already existing vNET and Public IP: Deploy scanner from image resource_id <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/existing_stracc_image_vNet_publicip.json" target="_blank">example_parameters/existing_stracc_image_vNet_publicip.json</a></li>
+</ol>
