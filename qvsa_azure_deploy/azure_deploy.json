@@ -71,6 +71,7 @@
       }
     },
     "proxy": {
+      "defaultValue": "",
       "type": "string",
       "metadata": {
         "description": "Input: Proxy string\nDescription: Optional proxy configuration for scanner\nLearn more: https://discussions.qualys.com/docs/DOC-5725-scanning-in-microsoft-azure-using-resource-manager-arm\n"
