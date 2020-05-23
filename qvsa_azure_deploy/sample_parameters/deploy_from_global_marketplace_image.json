@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "comments": "Sample: deploy from global marketplace image"
+  },
+  "parameters": {
+    "location": {
+      "value": "eastus"
+    },
+    "scannerName": {
+      "value": "qVSA-test-1"
+    },
+    "scannerVmSize": {
+      "value": "Standard_A2_v2"
+    },
+    "perscode": {
+      "value": "00000000000000"
+    },
+    "proxy": {
+      "value": "proxy://user:password@host.com:2222"
+    },
+    "ImageResourceIdOrVhdUri": {
+      "value": "global_marketplace"
+    },
+    "osDiskType": {
+      "value": "StandardSSD_LRS" 
+    },
+    "bootDiagStorageAccNameOrUri": {
+      "value": "qvsastraccstring"
+    },
+    "virtualNetworkNewOrExisting": {
+      "value": "new"
+    },
+    "publicIpNewOrExisting": {
+      "value": "new"
+    }
+  }
+}
