@@ -6,9 +6,9 @@
 <h3>Deploy using azcli</h3>
 
 ``` shell
-az group deployment create --debug --verbose --name <deployment name> --template-file azure_deploy.json --resource-group <resource-group-name>
+az group deployment create --debug --verbose --name deployment-name --template-file azure_deploy.json --resource-group resource-group-name
 ```
-```
+``` shell
 # type '?' to see help text
 Please provide string value for 'perscode' (? for help): ?
 Input: Personalization code
@@ -17,16 +17,16 @@ Learn more: https://www.qualys.com/docs/qualys-virtual-scanner-appliance-user-gu
 ```
 ``` shell
 # with parameter file
-az group deployment create --debug --verbose --name <deployment name> --template-file azure_deploy.json --resource-group <resource-group-name> --parameters @<path_to_json_parameter_file>
+az group deployment create --debug --verbose --name deployment-name --template-file azure_deploy.json --resource-group resource-group-name --parameters @path_to_json_parameter_file
 ```
 <h3>Deploy using PowerShell</h3>
 
 ```
-New-AzResourceGroupDeployment -ResourceGroupName <resource-group-name> -TemplateFile azure_deploy.json
+New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFile azure_deploy.json
 ```
 ```
 # with parameter file
-New-AzResourceGroupDeployment -ResourceGroupName <resource-group-name> -TemplateFile azure_deploy.json -TemplateParameterFile <path_to_json_parameter_file>
+New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFile azure_deploy.json -TemplateParameterFile path_to_json_parameter_file
 ```
 
 <table style="width:100%">
@@ -53,12 +53,12 @@ New-AzResourceGroupDeployment -ResourceGroupName <resource-group-name> -Template
   <tr>
     <td>perscode</td>
     <td>Personalization code</td>
-    <td>Qualys scanner personalization code, exactly 14 digits<br><a href="https://www.qualys.com/docs/qualys-virtual-scanner-appliance-user-guide.pdf" target="_blank">Learn more</a></td>
+    <td>Qualys scanner personalization code, exactly 14 digits.<br><a href="https://www.qualys.com/docs/qualys-virtual-scanner-appliance-user-guide.pdf" target="_blank">Learn more</a></td>
   </tr>
   <tr>
     <td>proxy</td>
     <td>Proxy string</td>
-    <td>Optional proxy configuration for scanner<br>Sample formats-<br><code>proxy://&lt;host&gt;:&lt;port&gt; (No auth proxy)<br>proxy://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt; (Auth proxy)<br>proxy://&lt;domain\\user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt; (Auth proxy with domain user)</code><br><a href="https://discussions.qualys.com/docs/DOC-5725-scanning-in-microsoft-azure-using-resource-manager-arm" target="_blank">Learn more</a></td>
+    <td>Optional proxy configuration for scanner.<br>Sample formats-<br><code>proxy://&lt;host&gt;:&lt;port&gt; (No auth proxy)<br>proxy://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt; (Auth proxy)<br>proxy://&lt;domain\\user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt; (Auth proxy with domain user)</code><br><a href="https://discussions.qualys.com/docs/DOC-5725-scanning-in-microsoft-azure-using-resource-manager-arm" target="_blank">Learn more</a></td>
   </tr>
   <tr>
     <td>ImageResourceIdOrVhdUri</td>
@@ -80,7 +80,7 @@ New-AzResourceGroupDeployment -ResourceGroupName <resource-group-name> -Template
   <tr>
     <td>osDiskType</td>
     <td>OS disk type from allowed values</td>
-    <td> Any one of the following<br><code>Premium_SSD, StandardSSD_LRS, Standard_LRS</code><br>Premium Disk (Premium_SSD) is recommended due to their production performance but only available with selected VM sizes<br><a href="https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disks-types" target="_blank">Learn more</a></td>
+    <td> Any one of the following-<br><code>Premium_SSD, StandardSSD_LRS, Standard_LRS</code><br>Premium Disk (Premium_SSD) is recommended due to their production performance but only available with selected VM sizes.<br><a href="https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disks-types" target="_blank">Learn more</a></td>
   </tr>
   <tr>
     <td>bootDiagStorageAccNameOrUri</td>
@@ -107,27 +107,34 @@ New-AzResourceGroupDeployment -ResourceGroupName <resource-group-name> -Template
         <li>resource_id:subnet_name where resource_id is of the existing virtual network</li>
       </ol>
     </td>
-    <td>Virtual network options for scanner vm</td>
+    <td>Virtual network options for scanner vm. If no value provided then template will create a new vNET as in input 'new'.</td>
   </tr>
   <tr>
     <td>publicIpNewOrExisting</td>
     <td>
       <ol>
-        <li>'new' for new public ip with default configurations</li>
-        <li>resource_id of the existing public ip instance</li>
+        <li>'new'</li>
+        <li>resource_id of existing public ip instance</li>
+        <li>Leave it empty</li>
       </ol>
     </td>
-    <td>Public IP options for scanner vm</td>
+    <td>
+      <ol>
+        <li>Template will create new Public IP instance with default configuration parameters</li>
+        <li>Template will link existing Public IP instance to VM</li>
+        <li>Template will skip Public IP configuration</li>
+      </ol>
+    </td>
   </tr>
   <tr>
     <td>newVirtualNetworkCustomObject</td>
     <td>vNet custom property object</td>
-    <td>Values in this object will override default values. See "Custom Virtual Network And Public IP Parameters" section for more information.</td>
+    <td>Values in this object will override default values. See <a href="#custom-virtual-network-and-public-ip-parameters">Custom Virtual Network And Public IP Parameters</a> section for more information.</td>
   </tr>
   <tr>
     <td>newPublicIpCustomObject</td>
     <td>Public Ip custom property object</td>
-    <td>Values in this object will override default values. See "Custom Virtual Network And Public IP Parameters" section for more information.</td>
+    <td>Values in this object will override default values. See <a href="#custom-virtual-network-and-public-ip-parameters">Custom Virtual Network And Public IP Parameters</a> section for more information.</td>
   </tr>
 </table>
 <h3>Custom Virtual Network And Public IP Parameters</h3>
@@ -155,7 +162,7 @@ New-AzResourceGroupDeployment -ResourceGroupName <resource-group-name> -Template
 <ol>
   <li>Basic Example: Easy deployment <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/deploy_all_resources_with_defaults.json" target="_blank">example_parameters/deploy_all_resources_with_defaults.json</a></li>
   <li>Deploy from global market image: <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/deploy_from_global_marketplace_image.json" target="_blank">example_parameters/deploy_from_global_marketplace_image.json.json</a></li>
-  <li>Custom vNET and Public IP parameters: See "Custom Virtual Network And Public IP Parameters" section for more information. <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/custom_vNet_and_pubip_param.json" target="_blank">example_parameters/custom_vNet_and_pubip_param.json</a></li>
+  <li>Custom vNET and Public IP parameters: See <a href="#custom-virtual-network-and-public-ip-parameters">Custom Virtual Network And Public IP Parameters</a> section for more information. <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/custom_vNet_and_pubip_param.json" target="_blank">example_parameters/custom_vNet_and_pubip_param.json</a></li>
   <li>No Public IP and disable boot diagnostics: <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/disable_boot_diag_and_no_public_ip.json" target="_blank">example_parameters/disable_boot_diag_and_no_public_ip.json</a></li>
   <li>Link scanner to already existing vNET and Public IP: Deploy scanner from image resource_id <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/existing_stracc_image_vNet_publicip.json" target="_blank">example_parameters/existing_stracc_image_vNet_publicip.json</a></li>
 </ol>
