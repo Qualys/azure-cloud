@@ -86,7 +86,7 @@
     "osDiskType": {
       "type": "string",
       "allowedValues": [
-        "Premium_SSD",
+        "Premium_LRS",
         "StandardSSD_LRS",
         "Standard_LRS"
       ],
@@ -102,7 +102,6 @@
     },
     "virtualNetworkNewOrExisting": {
       "type": "string",
-      "minLength": 2,
       "metadata": {
         "description": "Input: (input_1) 'new' for new virtual network with default configurations\n       (input_2) resource_id:subnet_name where resource_id is of the existing virtual network\nDescription: Virtual network options for scanner vm"
       }

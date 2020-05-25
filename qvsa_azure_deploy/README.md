@@ -21,10 +21,10 @@ az group deployment create --debug --verbose --name deployment-name --template-f
 ```
 <h3>Deploy using PowerShell</h3>
 
-```
+``` shell
 New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFile azure_deploy.json
 ```
-```
+``` shell
 # with parameter file
 New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFile azure_deploy.json -TemplateParameterFile path_to_json_parameter_file
 ```
@@ -80,7 +80,7 @@ New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFi
   <tr>
     <td>osDiskType</td>
     <td>OS disk type from allowed values</td>
-    <td> Any one of the following-<br><code>Premium_SSD, StandardSSD_LRS, Standard_LRS</code><br>Premium Disk (Premium_SSD) is recommended due to their production performance but only available with selected VM sizes.<br><a href="https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disks-types" target="_blank">Learn more</a></td>
+    <td> Any one of the following-<br><code>Premium_LRS, StandardSSD_LRS, Standard_LRS</code><br>Premium Disk (Premium_SSD) is recommended due to their production performance but only available with selected VM sizes.<br><a href="https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disks-types" target="_blank">Learn more</a></td>
   </tr>
   <tr>
     <td>bootDiagStorageAccNameOrUri</td>
@@ -133,14 +133,14 @@ New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFi
   </tr>
   <tr>
     <td>newPublicIpCustomObject</td>
-    <td>Public Ip custom property object</td>
+    <td>Public IP custom property object</td>
     <td>Values in this object will override default values. See <a href="#custom-virtual-network-and-public-ip-parameters">Custom Virtual Network And Public IP Parameters</a> section for more information.</td>
   </tr>
 </table>
 <h3>Custom Virtual Network And Public IP Parameters</h3>
-<p>Template deploys new virtual network and public ip instances with default paramters layed inside template. If needed these variables can be overridden with custom values. Paramters newVirtualNetworkCustomObject and newPublicIpCustomObject do exactly that. Each accepts a custom json object representing vNET and Public-IP configuration respectively.</p>
+<p>Template deploys new virtual network and public ip instances with default paramters mentioned inside template. If needed these variables can be overridden with custom values. Paramters newVirtualNetworkCustomObject and newPublicIpCustomObject do exactly that. Each accepts a custom json object representing vNET and Public-IP configuration respectively.</p>
 
-<p>Sample parameter file for more details: <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/custom_vNet_and_pubip_param.json" target="_blank">example_parameters/custom_vNet_and_pubip_param.json</a></p>
+<p>Example parameter file for more details: <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/custom_vNet_and_pubip_param.json" target="_blank">example_parameters/custom_vNet_and_pubip_param.json</a></p>
 
 ``` json
 {
