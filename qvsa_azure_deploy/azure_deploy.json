@@ -103,7 +103,7 @@
     "virtualNetworkNewOrExisting": {
       "type": "string",
       "metadata": {
-        "description": "Input: (input_1) 'new' for new virtual network with default configurations\n       (input_2) resource_id:subnet_name where resource_id is of the existing virtual network\nDescription: Virtual network options for scanner vm"
+        "description": "Input: (input_1) 'new' for new virtual network with default configurations\n       (input_2) resource_id:subnet_name where resource_id is of the existing virtual network and subnet_name is name of existing subnet in the virtual network\nDescription: Virtual network options for scanner vm"
       }
     },
     "newVirtualNetworkCustomObject": {
