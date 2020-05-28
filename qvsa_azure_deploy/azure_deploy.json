@@ -17,7 +17,7 @@
       "minLength": 1,
       "maxLength": 64,
       "metadata": {
-        "description": "Input: Scanner VM name\nDescription: VM name on Azure can be 1-64 character long and may contain alphanumerics, underscores, periods, and hyphens\nLearn more: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftcompute\n"
+        "description": "Input: Scanner VM name\nDescription: VM name on Azure can be 1-64 character long and may contain alphanumerics, underscores, periods, and hyphens but cannot contain special characters \/\"\"[]:|<>+=;,?*@& or begin with '_' or end with '.' or '-'\nLearn more: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftcompute\n"
       }
     },
     "scannerVmSize": {
@@ -67,7 +67,7 @@
       "minLength": 14,
       "maxLength": 14,
       "metadata": {
-        "description": "Input: Personalization code\nDescription: Qualys scanner personalization code, exactly 14 digits\nLearn more: https://www.qualys.com/docs/qualys-virtual-scanner-appliance-user-guide.pdf\n"
+        "description": "Input: Personalization code\nDescription: Qualys scanner personalization code, exactly 14 digits\nLearn more: https://discussions.qualys.com/docs/DOC-5725-scanning-in-microsoft-azure-using-resource-manager-arm\n"
       }
     },
     "proxy": {
@@ -97,7 +97,7 @@
     "bootDiagStorageAccNameOrUri": {
       "type": "string",
       "metadata": {
-        "description": "Input: (input_1) Unique name for new storage account\n       (input_2) Existing storage account uri\nDescription: If you are providing name for new storage account, ensure that name string is unique as storage account names are globally unique. For input_1, template will create new storage account, for input_2, template will use existing storage account. If no input is provided than template will not enable boot diagnostics for vm\n"
+        "description": "Input: (input_1) Unique name for new storage account\n       (input_2) Existing storage account uri\nDescription: If you are providing name for new storage account, ensure that name string is unique as storage account names are globally unique. For input_1, template will create new storage account, for input_2, template will use existing storage account. If no input is provided then template will not enable boot diagnostics for vm\n"
       }
     },
     "virtualNetworkNewOrExisting": {
@@ -122,7 +122,7 @@
     "publicIpNewOrExisting": {
       "type": "string",
       "metadata": {
-        "description": "Input: (input_1) 'new' for new public ip with default configurations\n       (input_2) resource_id of the existing public ip instance\nDescription: Public IP options for scanner vm"
+        "description": "Input: (input_1) 'new' for new Public IP with default configurations\n       (input_2) resource_id of the existing dissociated Public IP instance\nDescription: Public IP options for scanner vm. If left empty then template will skip Public IP configuration"
       }
     },
     "newPublicIpCustomObject": {

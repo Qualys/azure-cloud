@@ -6,7 +6,7 @@
 <h3>Deploy using azcli</h3>
 
 ``` shell
-az group deployment create --debug --verbose --name deployment-name --template-file azure_deploy.json --resource-group resource-group-name
+az deployment group create --debug --verbose --template-file azure_deploy.json --resource-group resource-group-name
 ```
 ``` shell
 # type '?' to see help text
@@ -17,7 +17,7 @@ Learn more: https://www.qualys.com/docs/qualys-virtual-scanner-appliance-user-gu
 ```
 ``` shell
 # with parameter file
-az group deployment create --debug --verbose --name deployment-name --template-file azure_deploy.json --resource-group resource-group-name --parameters @path_to_json_parameter_file
+az deployment group create --debug --verbose --template-file azure_deploy.json --resource-group resource-group-name --parameters path_to_json_parameter_file
 ```
 <h3>Deploy using PowerShell</h3>
 
@@ -53,12 +53,12 @@ New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFi
   <tr>
     <td>perscode</td>
     <td>Personalization code</td>
-    <td>Qualys scanner personalization code, exactly 14 digits.<br><a href="https://www.qualys.com/docs/qualys-virtual-scanner-appliance-user-guide.pdf" target="_blank">Learn more</a></td>
+    <td>Qualys scanner personalization code, exactly 14 digits.<br><a href="https://discussions.qualys.com/docs/DOC-5725-scanning-in-microsoft-azure-using-resource-manager-arm" target="_blank">Learn more</a></td>
   </tr>
   <tr>
     <td>proxy</td>
     <td>Proxy string</td>
-    <td>Optional proxy configuration for scanner.<br>Sample formats-<br><code>proxy://&lt;host&gt;:&lt;port&gt; (No auth proxy)<br>proxy://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt; (Auth proxy)<br>proxy://&lt;domain\\user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt; (Auth proxy with domain user)</code><br><a href="https://discussions.qualys.com/docs/DOC-5725-scanning-in-microsoft-azure-using-resource-manager-arm" target="_blank">Learn more</a></td>
+    <td>Optional proxy configuration for scanner.<br>Sample formats-<br><code>proxy://&lt;host&gt;:&lt;port&gt; (No auth proxy)</code><br><code>proxy://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt; (Auth proxy)</code><br><code>proxy://&lt;domain\\user&gt;:&lt;password&gt;@&lt;host&gt;:&lt;port&gt; (Auth proxy with domain user)</code><br><a href="https://discussions.qualys.com/docs/DOC-5725-scanning-in-microsoft-azure-using-resource-manager-arm" target="_blank">Learn more</a></td>
   </tr>
   <tr>
     <td>ImageResourceIdOrVhdUri</td>
