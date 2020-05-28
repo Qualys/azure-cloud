@@ -107,7 +107,7 @@ New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFi
         <li>resource_id:subnet_name where resource_id is of the existing virtual network</li>
       </ol>
     </td>
-    <td>Virtual network options for scanner vm. If no value provided then template will create a new vNET as in input 'new'. To link scanner with existing virtual network put resource_id:subnet_name where resource_id is of existing vNet and subnet_name is name of existing subnet in the vNet</td>
+    <td>Virtual network options for scanner vm. If no value provided then template will create a new vNET as in input 'new'. To link scanner with existing virtual network put resource_id:subnet_name where resource_id is of existing vNet and subnet_name is name of existing subnet in the vNet.</td>
   </tr>
   <tr>
     <td>publicIpNewOrExisting</td>
