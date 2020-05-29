@@ -16,7 +16,7 @@ az deployment group create --debug --verbose --template-file azure_deploy.json -
 Please provide string value for 'perscode' (? for help): ?
 Input: Personalization code
 Description: Qualys scanner personalization code, exactly 14 digits
-Learn more: https://www.qualys.com/docs/qualys-virtual-scanner-appliance-user-guide.pdf
+Learn more: https://discussions.qualys.com/docs/DOC-5725-scanning-in-microsoft-azure-using-resource-manager-arm
 ```
 ``` shell
 # with parameter file
