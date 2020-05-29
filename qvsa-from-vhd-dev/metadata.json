@@ -1,7 +1,0 @@
-{
-  "itemDisplayName": "Qualys Virtual Scanner Appliance v2.2 DEV",
-  "description": "This template allows you to create one instance of Qualys Virtual Scanner Appliance from DEV .vhd image",
-  "summary": "Deploy one instance of Qualys Virtual Scanner Appliance from DEV .vhd image",
-  "githubUsername": "gakimov",
-  "dateUpdated": "2016-04-15"
-}
