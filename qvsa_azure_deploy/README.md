@@ -6,6 +6,9 @@
 <h3>Deploy using azcli</h3>
 
 ``` shell
+# to pass 'proxy' as parameter use parameter-file
+# see parameter file examples in 'example_parameters' directory
+
 az deployment group create --debug --verbose --template-file azure_deploy.json --resource-group resource-group-name
 ```
 ``` shell
@@ -22,10 +25,6 @@ az deployment group create --debug --verbose --template-file azure_deploy.json -
 <h3>Deploy using PowerShell</h3>
 
 ``` shell
-New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFile azure_deploy.json
-```
-``` shell
-# with parameter file
 New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFile azure_deploy.json -TemplateParameterFile path_to_json_parameter_file
 ```
 <h3>Parameters</h3>
