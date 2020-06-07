@@ -1,6 +1,7 @@
 {
-  "$schema": "http://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "$schema": "http://schema.management.azure.com/schemas/2018-05-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
+  "apiProfile": "2019-03-01-hybrid",
   "metadata": {
     "comments": "This template is developed for Qualys Virtual Scanner Appliance deployment from image/vhd on Azure.",
     "author": "gakimov, rsoni"
@@ -22,42 +23,6 @@
     },
     "scannerVmSize": {
       "type": "string",
-      "allowedValues": [
-        "Standard_A2_v2",
-        "Standard_A1_v2",
-        "Standard_A4_v2",
-        "Standard_A8_v2",
-        "Standard_B1ms",
-        "Standard_B2s",
-        "Standard_B2ms",
-        "Standard_B4ms",
-        "Standard_D2a_v4",
-        "Standard_D4a_v4",
-        "Standard_D2as_v4",
-        "Standard_D4as_v4",
-        "Standard_DC1s_v2",
-        "Standard_DC2s_v2",
-        "Standard_DC4s_v2",
-        "Standard_D1_v2",
-        "Standard_D2_v2",
-        "Standard_D3_v2",
-        "Standard_DS1_v2",
-        "Standard_DS2_v2",
-        "Standard_DS3_v2",
-        "Standard_D2_v3",
-        "Standard_D4_v3",
-        "Standard_D2s_v3",
-        "Standard_D4s_v3",
-        "Standard_F2s_v2",
-        "Standard_F4s_v2",
-        "Standard_F8s_v2",
-        "Standard_D11_v2",
-        "Standard_DS11_v2",
-        "Standard_E2a_v4",
-        "Standard_E2as_v4",
-        "Standard_E2_v3",
-        "Standard_E2s_v3"
-      ],
       "metadata": {
         "description": "Input: Scanner VM size\nDescription: Choose appropriate size from allowed values\nLearn more: https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes\n"
       }
@@ -87,7 +52,6 @@
       "type": "string",
       "allowedValues": [
         "Premium_LRS",
-        "StandardSSD_LRS",
         "Standard_LRS"
       ],
       "metadata": {
@@ -98,6 +62,13 @@
       "type": "string",
       "metadata": {
         "description": "Input: (input_1) Unique name for new storage account\n       (input_2) Existing storage account uri\nDescription: If you are providing name for new storage account, ensure that name string is unique as storage account names are globally unique. For input_1, template will create new storage account, for input_2, template will use existing storage account. If no input is provided then template will not enable boot diagnostics for vm\n"
+      }
+    },
+    "bootDiagStrorageAccDomain": {
+      "type": "string",
+      "defaultValue": "blob.local.azurestack.external",
+      "metadata": {
+        "description": "Input: Storage account domain\nDescription: Storage account domain for boot diagnostics storage account. If empty string provided then template will use Azure Stack Development Kit(ASDK) platform's default domain blob.local.azurestack.external as default. This parameter is not required and will be ignored if using existing storage account URI in bootDiagStorageAccNameOrUri parameter\n"
       }
     },
     "virtualNetworkNewOrExisting": {
@@ -152,7 +123,7 @@
     "isBootDiag": "[if(empty(parameters('bootDiagStorageAccNameOrUri')), bool('false'), bool('true'))]",
     "isBootDiagStrAccNew": "[if(or(not(variables('isBootDiag')), contains(parameters('bootDiagStorageAccNameOrUri'), 'https://')), bool('false'), bool('true'))]",
     "bootDiagStrAccName": "[if(variables('isBootDiagStrAccNew'), parameters('bootDiagStorageAccNameOrUri'), 'straccdummystr')]",
-    "bootDiagStrAccUri": "[if(variables('isBootDiagStrAccNew'), concat('https://', parameters('bootDiagStorageAccNameOrUri'), '.blob.core.windows.net/'), parameters('bootDiagStorageAccNameOrUri'))]",
+    "bootDiagStrAccUri": "[if(variables('isBootDiagStrAccNew'), concat('https://', parameters('bootDiagStorageAccNameOrUri'), '.', parameters('bootDiagStrorageAccDomain')), parameters('bootDiagStorageAccNameOrUri'))]",
     "bootDiag": {
       "enabled": true,
       "storageUri": "[variables('bootDiagStrAccUri')]"
@@ -261,7 +232,6 @@
       "name": "[variables('imageName')]",
       "type": "Microsoft.Compute/images",
       "condition": "[variables('isVhdBlob')]",
-      "apiVersion": "2019-03-01",
       "location": "[parameters('location')]",
       "properties": {
         "storageProfile": {
@@ -272,15 +242,13 @@
           },
           "dataDisks": [],
           "zoneResilient": false
-        },
-        "hyperVGeneration": "V1"
+        }
       }
     },
     {
       "name": "[variables('vNetName')]",
       "type": "Microsoft.Network/virtualNetworks",
       "condition": "[variables('isvNetNew')]",
-      "apiVersion": "2019-11-01",
       "location": "[parameters('location')]",
       "properties": {
         "addressSpace": {
@@ -299,7 +267,6 @@
     {
       "name": "[variables('nsgName')]",
       "type": "Microsoft.Network/networkSecurityGroups",
-      "apiVersion": "2019-11-01",
       "location": "[parameters('location')]",
       "properties": {
         "securityRules": "[variables('networkSecurityGroupRules')]"
@@ -309,7 +276,6 @@
       "name": "[variables('publicIpName')]",
       "type": "Microsoft.Network/publicIpAddresses",
       "condition": "[variables('isPubIpNew')]",
-      "apiVersion": "2019-11-01",
       "location": "[parameters('location')]",
       "properties": {
         "publicIpAllocationMethod": "[if(empty(parameters('newPublicIpCustomObject').publicIpAllocationMethod), 'Dynamic', parameters('newPublicIpCustomObject').publicIpAllocationMethod)]",
@@ -323,7 +289,6 @@
     {
       "name": "[variables('netIntName')]",
       "type": "Microsoft.Network/networkInterfaces",
-      "apiVersion": "2019-11-01",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/publicIpAddresses', variables('publicIpName'))]",
@@ -346,7 +311,6 @@
       "name": "[variables('bootDiagStrAccName')]",
       "type": "Microsoft.Storage/storageAccounts",
       "condition": "[variables('isBootDiag')]",
-      "apiVersion": "2019-06-01",
       "location": "[parameters('location')]",
       "properties": {},
       "kind": "Storage",
@@ -358,7 +322,6 @@
       "name": "[variables('scannerName1')]",
       "type": "Microsoft.Compute/virtualMachines",
       "condition": "[not(variables('isGlobalMktImage'))]",
-      "apiVersion": "2019-12-01",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts', variables('bootDiagStrAccName'))]",
@@ -371,7 +334,6 @@
       "name": "[variables('scannerName2')]",
       "type": "Microsoft.Compute/virtualMachines",
       "condition": "[variables('isGlobalMktImage')]",
-      "apiVersion": "2019-12-01",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts', variables('bootDiagStrAccName'))]",

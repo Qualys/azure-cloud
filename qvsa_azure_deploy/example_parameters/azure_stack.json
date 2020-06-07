@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "comments": "Test-1: deploy all listed resources with default values"
+  },
+  "parameters": {
+    "location": {
+      "value": "local"
+    },
+    "scannerName": {
+      "value": "qVSA-test-1"
+    },
+    "scannerVmSize": {
+      "value": "Standard_A2_v2"
+    },
+    "perscode": {
+      "value": "00000000000000"
+    },
+    "proxy": {
+      "value": "proxy://user:password@host.com:2222"
+    },
+    "ImageResourceIdOrVhdUri": {
+      "value": "https://qvsaimages.blob.local.azurestack.external/images/qVSA-Azure-2.7.29-1.vhd"
+    },
+    "osDiskType": {
+      "value": "Standard_LRS" 
+    },
+    "bootDiagStorageAccNameOrUri": {
+      "value": "qvsastracctest123"
+    },
+    "bootDiagStrorageAccDomain": {
+      "value": "blob.local.azurestack.external"
+    },
+    "virtualNetworkNewOrExisting": {
+      "value": "new"
+    },
+    "publicIpNewOrExisting": {
+      "value": "new"
+    }
+  }
+}
