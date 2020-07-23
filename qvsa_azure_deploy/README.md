@@ -173,3 +173,46 @@ New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFi
   <li>Link scanner to already existing vNET and Public IP: Deploy scanner from image resource_id <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/existing_stracc_image_vNet_publicip.json" target="_blank">example_parameters/existing_stracc_image_vNet_publicip.json</a></li>
   <li>Deploy scanner on Azure Stack: <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/azure_stack.json" target="_blank">example_parameters/azure_stack.json</a></li>
 </ol>
+
+<h3>Accepting Legal Policy</h3>
+<p>If you are deploying Qualys Virtual Scanner Appliance very first time on your subscription, Microsoft may require you to accepts our legal terms and conditions first before deploying VM resources. You can see our legal terms and conditions and privacy policy using the following command.</p>
+
+```shell
+az vm image terms show --offer 'qualys-virtual-scanner' --plan 'qvsa' --publisher 'qualysguard'
+
+Output-
+{
+  "accepted": false,
+  "id": "/subscriptions/n112ug51-7e18-48u9-9b0a-9bnbv46545r20/providers/Microsoft.MarketplaceOrdering/offerTypes/VirtualMachine/publishers/qualysguard/offers/qualys-virtual-scanner/plans/qvsa-app/agreements/current",
+  "licenseTextLink": "https://storelegalterms.blob.core.windows.net/legalterms/3E5ED_legalterms_QUALYSGUARD%253a24QUALYS%253a2DVIRTUAL%253a2DSCANNER%253a24QVSA%253a2DAPP%253a247X6MWRP2X774O53E7DCCZFOLE2LAAOS6V3PWH3SELAOUCBDJJELHBXCU4VK55ZVSCBRCMWFBIL4DCLAHSWNHXFG2ASI5CJ2Y4WGCPYA.txt",
+  "name": "qvsa-app",
+  "plan": "qvsa-app",
+  "privacyPolicyLink": "https://www.qualys.com/company/privacy/",
+  "product": "qualys-virtual-scanner",
+  "publisher": "qualysguard",
+  "retrieveDatetime": "2020-07-23T09:10:56.7986203Z",
+  "signature": "BVFZEH74ZTBQY6TKG6JEDM7STMZHWGU7DCSR3DRBP4MQLWAJ2HNC7V47PQSPGBA7AMRDJUG46OGITJP3WHA4333PQACD3IIBNRZ3MZA",
+  "type": "Microsoft.MarketplaceOrdering/offertypes"
+}
+```
+
+<p>With the following command, you can accept our legal terms and conditions.</p>
+
+```shell
+az vm image terms accept --offer 'qualys-virtual-scanner' --plan 'qvsa' --publisher 'qualysguard'
+
+Output-
+{
+  "accepted": true,
+  "id": "/subscriptions/n112ug51-7e18-48u9-9b0a-9bnbv46545r20/providers/Microsoft.MarketplaceOrdering/offerTypes/Microsoft.MarketplaceOrdering/offertypes/publishers/qualysguard/offers/qualys-virtual-scanner/plans/qvsa/agreements/current",
+  "licenseTextLink": "https://storelegalterms.blob.core.windows.net/legalterms/3E5ED_legalterms_QUALYSGUARD%253a24QUALYS%253a2DVIRTUAL%253a2DSCANNER%253a24QVSA%253a247X6MWRP2X774O53E7DCCZFOLE2LAAOS6V3PWH3SELAOUCBDJJELHBXCU4VK55ZVSCBRCMWFBIL4DCLAHSWNHXFG2ASI5CJ2Y4WGCPYA.txt",
+  "name": "qvsa",
+  "plan": "qvsa",
+  "privacyPolicyLink": "https://www.qualys.com/company/privacy/",
+  "product": "qualys-virtual-scanner",
+  "publisher": "qualysguard",
+  "retrieveDatetime": "2020-07-23T09:19:07.8599072Z",
+  "signature": "ONEMMSJA5ORJCRED26NMZ6YWXOH3GWVRNNSQBQ3HPV2HWMRDDGRR5IN5N3LP3EYBF3UG5A5ZKK2OJMS5S2RPA4UYV55Q23V4P5EY7RA",
+  "type": "Microsoft.MarketplaceOrdering/offertypes"
+}
+```
