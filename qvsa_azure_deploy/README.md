@@ -175,7 +175,7 @@ New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFi
 </ol>
 
 <h3>Accepting Legal Policy</h3>
-<p>If you are deploying Qualys Virtual Scanner Appliance very first time on your subscription, Microsoft may require you to accepts our legal terms and conditions first before deploying VM resources. You can see our legal terms and conditions and privacy policy using the following command.</p>
+<p>If you are deploying the Qualys Virtual Scanner Appliance for the first time on your subscription, Microsoft may require you to accept our legal terms and conditions first before deploying VM resources. You can view our legal terms and conditions and privacy policy using the following command.</p>
 
 ```shell
 az vm image terms show --offer 'qualys-virtual-scanner' --plan 'qvsa' --publisher 'qualysguard'
