@@ -49,7 +49,7 @@ New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFi
   <tr>
     <td>scannerVmSize</td>
     <td>Scanner VM size</td>
-    <td>Any one of the following<br><code>Standard_A1_v2, Standard_A2_v2, Standard_A4_v2, Standard_A8_v2, Standard_B1ms, Standard_B2s, Standard_B2ms, Standard_B4ms, Standard_D2a_v4, Standard_D4a_v4, Standard_D2as_v4, Standard_D4as_v4, Standard_DC1s_v2, Standard_DC2s_v2, Standard_DC4s_v2, Standard_D1_v2, Standard_D2_v2, Standard_D3_v2, Standard_DS1_v2, Standard_DS2_v2, Standard_DS3_v2, Standard_D2_v3, Standard_D4_v3, Standard_D2s_v3, Standard_D4s_v3, Standard_F2s_v2, Standard_F4s_v2, Standard_F8s_v2, Standard_D11_v2, Standard_DS11_v2, Standard_E2a_v4, Standard_E2as_v4, Standard_E2_v3, Standard_E2s_v3</code><br><a href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes" target="_blank">Learn more</a></td>
+    <td>Any one of the following<br><code>Standard_A1_v2, Standard_A2_v2, Standard_A4_v2, Standard_A8_v2, Standard_B1ms, Standard_B2s, Standard_B2ms, Standard_B4ms, Standard_D2a_v4, Standard_D4a_v4, Standard_D2as_v4, Standard_D4as_v4, Standard_D1_v2, Standard_D2_v2, Standard_D3_v2, Standard_DS1_v2, Standard_DS2_v2, Standard_DS3_v2, Standard_D2_v3, Standard_D4_v3, Standard_D2s_v3, Standard_D4s_v3, Standard_F2s_v2, Standard_F4s_v2, Standard_D11_v2, Standard_DS11_v2, Standard_E2a_v4, Standard_E2as_v4, Standard_E2_v3, Standard_E2s_v3</code><br><a href="https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes" target="_blank">Learn more</a></td>
   </tr>
   <tr>
     <td>perscode</td>
