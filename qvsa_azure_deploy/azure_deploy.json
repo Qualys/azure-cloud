@@ -47,6 +47,8 @@
         "Standard_D4s_v3",
         "Standard_F2s_v2",
         "Standard_F4s_v2",
+        "Standard_F8s",
+        "Standard_F8",
         "Standard_D11_v2",
         "Standard_DS11_v2",
         "Standard_E2a_v4",
@@ -146,7 +148,7 @@
     "nsgName": "[concat(parameters('scannerName'), '-nsg-', variables('randomStr'))]",
     "netIntName": "[concat(parameters('scannerName'), '-netInt-', variables('randomStr'))]",
     "isBootDiag": "[if(empty(parameters('bootDiagStorageAccNameOrUri')), bool('false'), bool('true'))]",
-    "isBootDiagStrAccNew": "[if(or(not(variables('isBootDiag')), contains(parameters('bootDiagStorageAccNameOrUri'), 'https://')), bool('false'), bool('true'))]",
+    "isBootDiagStrAccNew": "[if(and(variables('isBootDiag'), contains(parameters('bootDiagStorageAccNameOrUri'), 'https://')), bool('false'), bool('true'))]",
     "bootDiagStrAccName": "[if(variables('isBootDiagStrAccNew'), parameters('bootDiagStorageAccNameOrUri'), 'straccdummystr')]",
     "bootDiagStrAccUri": "[if(variables('isBootDiagStrAccNew'), concat('https://', parameters('bootDiagStorageAccNameOrUri'), '.blob.core.windows.net/'), parameters('bootDiagStorageAccNameOrUri'))]",
     "bootDiag": {
@@ -341,7 +343,7 @@
     {
       "name": "[variables('bootDiagStrAccName')]",
       "type": "Microsoft.Storage/storageAccounts",
-      "condition": "[variables('isBootDiag')]",
+      "condition": "[and(variables('isBootDiag'), variables('isBootDiagStrAccNew'))]",
       "apiVersion": "2019-06-01",
       "location": "[parameters('location')]",
       "properties": {},

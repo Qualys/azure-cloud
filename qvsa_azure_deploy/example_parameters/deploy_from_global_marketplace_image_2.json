@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": {
+    "comments": "Sample: deploy from global marketplace image"
+  },
+  "parameters": {
+    "location": {
+      "value": "southeastasia"
+    },
+    "scannerName": {
+      "value": "qVSA-2.7.29-southeastasia"
+    },
+    "scannerVmSize": {
+      "value": "Standard_F8s"
+    },
+    "perscode": {
+      "value": "00000000000000"
+    },
+    "ImageResourceIdOrVhdUri": {
+      "value": "global_marketplace"
+    },
+    "osDiskType": {
+      "value": "Premium_LRS" 
+    },
+    "bootDiagStorageAccNameOrUri": {
+      "value": "https://stracc.blob.core.windows.net"
+    },
+    "virtualNetworkNewOrExisting": {
+      "value": "new"
+    },
+    "publicIpNewOrExisting": {
+      "value": "new"
+    }
+  }
+}
