@@ -211,7 +211,7 @@
     "qVSAPublisher": "qualysguard",
     "qVSAOffer": "qualys-virtual-scanner",
     "qVSASku": "qvsa",
-    "qVSAVersion": "2.7.2901",
+    "qVSAVersion": "2.7.2903",
     "imageMarketplace": {
       "publisher": "[variables('qVSAPublisher')]",
       "offer": "[variables('qVSAOffer')]",
