@@ -77,6 +77,7 @@
     },
     "ImageResourceIdOrVhdUri": {
       "type": "string",
+      "defaultValue": "global_marketplace",
       "metadata": {
         "description": "Input: (input_1) qVSA image resource id\n       (input_2) Storage account vhd blob uri\n       (input_3) 'global_marketplace'\nDescription: qVSA image pointer in form of image resourceId, storage account vhd blob uri or 'global_marketplace' string. If you provide vhd blob uri then template will first create qVSA-image-{suffix} vm image from the provided vhd blob\n"
       }
@@ -104,6 +105,13 @@
         "description": "Input: (input_1) 'new' for new virtual network with default configurations\n       (input_2) resource_id:subnet_name where resource_id is of the existing virtual network and subnet_name is name of existing subnet in the virtual network\nDescription: Virtual network options for scanner vm"
       }
     },
+    "virtualNetworkName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Name of the virtual network."
+      }
+    },
     "newVirtualNetworkCustomObject": {
       "type": "object",
       "defaultValue": {
@@ -117,10 +125,31 @@
         "description": "Input: vNet custom property object\nDescription: Values in this object will override default values\nLearn more: https://github.com/Qualys/azure-cloud/tree/master/qvsa_azure_deploy#custom-virtual-network-and-public-ip-parameters\n"
       }
     },
+    "networkInterfaceName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Name of the network interface."
+      }
+    },
+    "nsgName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Name of the Network Security Group."
+      }
+    },
     "publicIpNewOrExisting": {
       "type": "string",
       "metadata": {
         "description": "Input: (input_1) 'new' for new Public IP with default configurations\n       (input_2) resource_id of the existing dissociated Public IP instance\nDescription: Public IP options for scanner vm. If left empty then template will skip Public IP configuration"
+      }
+    },
+    "publicIpName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Name of the the public IP instance."
       }
     },
     "newPublicIpCustomObject": {
@@ -140,13 +169,13 @@
     "isvNetNew": "[if(or(equals(parameters('virtualNetworkNewOrExisting'), 'new'), empty(parameters('virtualNetworkNewOrExisting'))), bool('true'), bool('false'))]",
     "vNetSubnet": "[if(variables('isvNetNew'), json('[]'), split(parameters('virtualNetworkNewOrExisting'), ':'))]",
     "vNetResource": "[if(not(variables('isvNetNew')), split(variables('vNetSubnet')[0], '/'), json('[]'))]",
-    "vNetName": "[concat(take(parameters('scannerName'), 54), '-vNet-', variables('randomStr'))]",
+    "vNetName": "[if(empty(parameters('virtualNetworkName')), concat(parameters('scannerName'), '-vNet-', variables('randomStr')), parameters('virtualNetworkName'))]",
     "subnetName": "[if(empty(parameters('newVirtualNetworkCustomObject').subnet.name), 'scanner-subnet', parameters('newVirtualNetworkCustomObject').subnet.name)]",
     "isPublicIp": "[if(empty(parameters('publicIpNewOrExisting')), bool('false'), bool('true'))]",
     "isPubIpNew": "[if(equals(parameters('publicIpNewOrExisting'), 'new'), bool('true'), bool('false'))]",
-    "publicIpName": "[concat(parameters('scannerName'), '-ip-', variables('randomStr'))]",
-    "nsgName": "[concat(parameters('scannerName'), '-nsg-', variables('randomStr'))]",
-    "netIntName": "[concat(parameters('scannerName'), '-netInt-', variables('randomStr'))]",
+    "publicIpName":"[if(empty(parameters('publicIpName')), concat(parameters('scannerName'), '-ip-', variables('randomStr')), parameters('publicIpName'))]",
+    "nsgName": "[if(empty(parameters('nsgName')), concat(parameters('scannerName'), '-nsg-', variables('randomStr')), parameters('nsgName'))]",
+    "netIntName": "[if(empty(parameters('networkInterfaceName')), concat(parameters('scannerName'), '-netInt-', variables('randomStr')), parameters('networkInterfaceName'))]",
     "isBootDiag": "[if(empty(parameters('bootDiagStorageAccNameOrUri')), bool('false'), bool('true'))]",
     "isBootDiagStrAccNew": "[if(and(variables('isBootDiag'), contains(parameters('bootDiagStorageAccNameOrUri'), 'https://')), bool('false'), bool('true'))]",
     "bootDiagStrAccName": "[if(variables('isBootDiagStrAccNew'), parameters('bootDiagStorageAccNameOrUri'), 'straccdummystr')]",

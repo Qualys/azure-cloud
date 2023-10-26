@@ -3,15 +3,31 @@
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
+<h3>ARM template files</h3>
+<table style="width:50%">
+  <tr>
+    <th>ARM template file</th>
+    <th>platform</th>
+  </tr>
+  <tr>
+    <td>azure_deploy.json</td>
+    <td>Azure (portal.azure.com)</td>
+  </tr>
+  <tr>
+    <td>azure_stack_deploy.json</td>
+    <td>Azure Stack (Private/hybrid)</td>
+  </tr>
+</table>
+
 <h3>Deploy using azcli</h3>
 
 ``` shell
 # to pass 'proxy' as parameter use parameter-file
 # see parameter file examples in 'example_parameters' directory
-az deployment group create --debug --verbose --template-file azure_deploy.json --resource-group resource-group-name
+az group deployment create --debug --verbose --template-file azure_deploy.json --resource-group resource-group-name
 
 # for Azure Stack
-az deployment group create --debug --verbose --template-file azure_stack_deploy.json --resource-group resource-group-name
+az group deployment create --debug --verbose --template-file azure_stack_deploy.json --resource-group resource-group-name
 ```
 ``` shell
 # type '?' to see help text
@@ -139,8 +155,28 @@ New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFi
   </tr>
   <tr>
     <td>bootDiagStrorageAccDomain<br><code>(azure_stack_deploy.json)</code></td>
-    <td>Storage account domain <br><code>(Only for Azure Stack azure_stack_deploy.json)</code></td>
+    <td>Storage account domain<br><code>(Only for Azure Stack azure_stack_deploy.json)</code></td>
     <td>Storage account domain for boot diagnostics storage account. If empty string provided then template will use Azure Stack Development Kit (ASDK) platform's default domain <code>blob.local.azurestack.external</code> as default. This parameter is not required and will be ignored if using existing storage account URI in bootDiagStorageAccNameOrUri parameter.<br>For example in URI-<br><code>https://qvsaimages.blob.local.stackserver.com/images/qVSA-Azure-2.7.29-1.vhd</code><br><code>blob.local.stackserver.com</code> is the storage account domain.</td>
+  </tr>
+  <tr>
+    <td>virtualNetworkName<br><code>(azure_deploy.json)</code></td>
+    <td>Name of the virtual network instance<br><code>(Only for Azure azure_deploy.json)</code></td>
+    <td>This parameter can be used to provide a custom name when creating a new virtual network for the scanner VM during deployment. This parameter is used in conjunction with virtualNetworkNewOrExisting==new. If not provided, the ARM template will come up with a name by combining the "scannerName" and a random string. You may use this parameter in case your organization has an established resource naming policy.</td>
+  </tr>
+  <tr>
+    <td>networkInterfaceName<br><code>(azure_deploy.json)</code></td>
+    <td>Name of the network interface instance<br><code>(Only for Azure azure_deploy.json)</code></td>
+    <td>Use this parameter to provide a custom name for the network interface instance created for the scanner VM. If not provided, the ARM template will come-up with a name by combining the "scannerName" and a random string. You may use this parameter in-case your organization has an established resource naming policy.</td>
+  </tr>
+  <tr>
+    <td>nsgName<br><code>(azure_deploy.json)</code></td>
+    <td>Name of the network security group instance<br><code>(Only for Azure azure_deploy.json)</code></td>
+    <td>Use this parameter to provide a custom name for the network security group instance created for the scanner VM. If not provided, the ARM template will come-up with a name by combining the "scannerName" and a random string. You may use this parameter in-case your organization has an established resource naming policy.</td>
+  </tr>
+  <tr>
+    <td>publicIpName<br><code>(azure_deploy.json)</code></td>
+    <td>Name of the public IP instance<br><code>(Only for Azure azure_deploy.json)</code></td>
+    <td>This parameter can be used to provide a custom name when creating a new publicIP for the scanner VM during deployment. This parameter is used in conjunction with publicIpNewOrExisting==new. If not provided, the ARM template will come-up with a name by combining the "scannerName" and a random string. You may use this parameter in case your organization has an established resource naming policy.</td>
   </tr>
 </table>
 <h3>Custom Virtual Network And Public IP Parameters</h3>
@@ -171,6 +207,7 @@ New-AzResourceGroupDeployment -ResourceGroupName resource-group-name -TemplateFi
   <li>Custom vNET and Public IP parameters: See <a href="#custom-virtual-network-and-public-ip-parameters">Custom Virtual Network And Public IP Parameters</a> section for more information. <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/custom_vNet_and_pubip_param.json" target="_blank">example_parameters/custom_vNet_and_pubip_param.json</a></li>
   <li>No Public IP and disable boot diagnostics: <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/disable_boot_diag_and_no_public_ip.json" target="_blank">example_parameters/disable_boot_diag_and_no_public_ip.json</a></li>
   <li>Link scanner to already existing vNET and Public IP: Deploy scanner from image resource_id <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/existing_stracc_image_vNet_publicip.json" target="_blank">example_parameters/existing_stracc_image_vNet_publicip.json</a></li>
+  <li>Provide custom names for virtual network, network interface, network security group and public IP instances: <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/custom_resource_names.json" target="_blank">example_parameters/custom_resource_names.json</a></li>
   <li>Deploy scanner on Azure Stack: <a href="https://github.com/Qualys/azure-cloud/blob/master/qvsa_azure_deploy/example_parameters/azure_stack.json" target="_blank">example_parameters/azure_stack.json</a></li>
 </ol>
 

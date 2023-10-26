@@ -2,11 +2,11 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "metadata": {
-    "comments": "Sample: deploy from global marketplace image"
+    "comments": "Sample: deploy from global marketplace image with custom resource names"
   },
   "parameters": {
     "location": {
-      "value": "eastus"
+      "value": "canadacentral"
     },
     "scannerName": {
       "value": "qVSA-test-1"
@@ -15,7 +15,7 @@
       "value": "Standard_A2_v2"
     },
     "perscode": {
-      "value": "00000000000000"
+      "value": "11111111111111"
     },
     "proxy": {
       "value": "proxy://user:password@host.com:2222"
@@ -24,7 +24,7 @@
       "value": "global_marketplace"
     },
     "osDiskType": {
-      "value": "StandardSSD_LRS" 
+      "value": "StandardSSD_LRS"
     },
     "bootDiagStorageAccNameOrUri": {
       "value": "qvsastraccstring"
@@ -34,6 +34,18 @@
     },
     "publicIpNewOrExisting": {
       "value": "new"
+    },
+    "virtualNetworkName": {
+      "value": "qVSA-vNet"
+    },
+    "networkInterfaceName": {
+      "value": "qVSA-NIC"
+    },
+    "nsgName": {
+      "value": "qVSA-NSG"
+    },
+    "publicIpName": {
+      "value": "qVSA-publicIP"
     }
   }
 }
