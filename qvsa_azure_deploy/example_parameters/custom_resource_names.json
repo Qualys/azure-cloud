@@ -18,7 +18,7 @@
       "value": "11111111111111"
     },
     "proxy": {
-      "value": "proxy://user:password@host.com:2222"
+      "value": "user:password@host.com:2222"
     },
     "ImageResourceIdOrVhdUri": {
       "value": "global_marketplace"

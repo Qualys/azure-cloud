@@ -18,7 +18,7 @@
       "value": "00000000000000"
     },
     "proxy": {
-      "value": "proxy://user:password@host.com:2222"
+      "value": "user:password@host.com:2222"
     },
     "ImageResourceIdOrVhdUri": {
       "value": "/subscriptions/938e6ef8-9eec-47b8-973e-280b64b35872/resourceGroups/qvsa-res-grp/providers/Microsoft.Compute/images/qVSA-Azure-2.7.29-1"

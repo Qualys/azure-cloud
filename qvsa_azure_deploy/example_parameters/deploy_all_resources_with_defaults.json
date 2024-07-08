@@ -18,7 +18,7 @@
       "value": "00000000000000"
     },
     "proxy": {
-      "value": "proxy://user:password@host.com:2222"
+      "value": "user:password@host.com:2222"
     },
     "ImageResourceIdOrVhdUri": {
       "value": "https://yourstorageaccount.blob.core.windows.net/images/qVSA-Azure-2.7.29-1.vhd"

@@ -1,39 +1,40 @@
-{
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-  "contentVersion": "1.0.0.0",
-  "metadata": {
-    "comments": "Sample: no public ip and disable boot diag"
-  },
-  "parameters": {
-    "location": {
-      "value": "eastus"
+  {
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "metadata": {
+      "comments": "Sample: no public ip and disable boot diag"
     },
-    "scannerName": {
-      "value": "qVSA-test-1"
-    },
-    "scannerVmSize": {
-      "value": "Standard_A2_v2"
-    },
-    "perscode": {
-      "value": "00000000000000"
-    },
-    "proxy": {
-      "value": "proxy://user:password@host.com:2222"
-    },
-    "ImageResourceIdOrVhdUri": {
-      "value": "/subscriptions/938e6ef8-9eec-47b8-973e-280b64b35872/resourceGroups/qvsa-res-grp/providers/Microsoft.Compute/images/qVSA-Azure-2.7.29-1"
-    },
-    "osDiskType": {
-      "value": "StandardSSD_LRS" 
-    },
-    "bootDiagStorageAccNameOrUri": {
-      "value": ""
-    },
-    "virtualNetworkNewOrExisting": {
-      "value": "/subscriptions/938e6ef8-9eec-47b8-973e-280b64b35872/resourceGroups/qvsa-res-grp/providers/Microsoft.Network/publicIPAddresses/qvsa-test"
-    },
-    "publicIpNewOrExisting": {
-      "value": ""
+    "parameters": {
+      "location": {
+        "value": "eastus"
+      },
+      "scannerName": {
+        "value": "qVSA-test-1"
+      },
+      "scannerVmSize": {
+        "value": "Standard_A2_v2"
+      },
+      "perscode": {
+        "value": "00000000000000"
+      },
+      "proxy": {
+        "value": "user:password@host.com:2222"
+      },
+      "ImageResourceIdOrVhdUri": {
+        "value": "/subscriptions/938e6ef8-9eec-47b8-973e-280b64b35872/resourceGroups/qvsa-res-grp/providers/Microsoft.Compute/images/qVSA-Azure-2.7.29-1"
+      },
+      "osDiskType": {
+        "value": "StandardSSD_LRS" 
+      },
+      "bootDiagStorageAccNameOrUri": {
+        "value": ""
+      },
+      "virtualNetworkNewOrExisting": {
+        "value": "/subscriptions/938e6ef8-9eec-47b8-973e-280b64b35872/resourceGroups/qvsa-res-grp/providers/Microsoft.Network/publicIPAddresses/qvsa-test"
+      },
+      "publicIpNewOrExisting": {
+        "value": ""
+      }
     }
   }
-}
+
